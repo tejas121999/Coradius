@@ -54,7 +54,7 @@ const EditUser = (props) => {
     }, [])
 
     const users = useSelector(state => state.data.user)
-    console.log('user', users)
+    // console.log('user', users)
     return (
         <div className="container-fluid">
             <Formik

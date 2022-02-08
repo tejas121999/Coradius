@@ -6,7 +6,7 @@ export const getAllUserAction = () => {
     return dispatch => {
         userServices.getUser()
             .then(res => {
-                console.log("res", res)
+                // console.log("res", res)
                 dispatch(getAllUser(res.data));
             })
             .catch(err => {

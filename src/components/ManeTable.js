@@ -22,7 +22,7 @@ const ManeTable = () => {
     const dispatch = useDispatch()
 
     const { users } = useSelector(state => state.data)
-    console.log(users)
+    // console.log(users)
     useEffect(() => {
         dispatch(getAllUserAction())
     })
