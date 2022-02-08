@@ -12,7 +12,7 @@ function userServices() {
     this.addUser = async user => await axios.post(BASE_URL + '/add', user)
 
     // get user by id 
-    this.getUserById = async (id) => await axios.get(BASE_URL + `/user/${id}`)
+    this.getUserById = async (id) => await axios.get(BASE_URL + `/fetch/${id}`)
 
     // update user by id
     this.updateUser = async (id, user) => await axios.put(BASE_URL + `/edit/${id}`, user)
