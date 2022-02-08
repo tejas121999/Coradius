@@ -1,0 +1,13 @@
+{
+  "user": [
+    {
+      "fname": "tejas",
+      "lname": "talkar",
+      "email": "tejas@gmail.com",
+      "state": "maharashtra",
+      "city": "mumbai",
+      "pincode": "45415",
+      "id": 1
+    }
+  ]
+}
