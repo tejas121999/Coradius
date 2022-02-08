@@ -3,8 +3,9 @@ import { BASE_URL } from '../utils/apiEndpoint'
 
 function userServices() {
     // get all user
-    // this.getUser = async () => await axios.get(BASE_URL + '/fetch')
+    // this.getUser = async () => await axios.get(BASE_URL + '/fetch') this api end poing cannot get because api is protected and cannot hit 
     this.getUser = async () => await axios.get(BASE_URL + '/user')
+
     // delete user
     // this.deleteUser = async id => await axios.delete(BASE_URL + `/delete/${id}`)
     this.deleteUser = async id => await axios.delete(BASE_URL + `/user/${id}`)

@@ -1,42 +1,50 @@
 import React from 'react';
-import { Field, Form, Formik, ErrorMessage } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { addUserAction } from '../redux/UserAction';
 
-const validationSchema = yup.object({
-    fname: yup
-        .string()
-        .required('Required'),
-    lname: yup
-        .string()
-        .required('Required'),
-    email: yup
-        .string()
-        .required('Required')
-        .email('Invalid Email Format'),
-    state: yup
-        .string()
-        .required('Required'),
-    city: yup
-        .string()
-        .required('Required'),
-    pincode: yup
-        .string()
-        .required('Required')
-        .max(5, 'max limite is 5 only'),
-})
 
-const onUserAdd = values => {
-    const object = {
-        fname: values.fname,
-        lname: values.lname,
-        email: values.email,
-        state: values.state,
-        city: values.city,
-        pincode: values.pincode
+const Adduser = (props) => {
+
+    const dispatch = useDispatch();
+
+    const validationSchema = yup.object({
+        fname: yup
+            .string()
+            .required('Required'),
+        lname: yup
+            .string()
+            .required('Required'),
+        email: yup
+            .string()
+            .required('Required')
+            .email('Invalid Email Format'),
+        state: yup
+            .string()
+            .required('Required'),
+        city: yup
+            .string()
+            .required('Required'),
+        pincode: yup
+            .string()
+            .required('Required')
+            .max(5, 'max limite is 5 only'),
+    })
+
+    const onUserAdd = values => {
+        const object = {
+            fname: values.fname,
+            lname: values.lname,
+            email: values.email,
+            state: values.state,
+            city: values.city,
+            pincode: values.pincode
+        }
+        dispatch(addUserAction(object,props.history ))
     }
-}
 
-const Adduser = () => {
+
     return (
         <div className="container-fluid">
             <Formik

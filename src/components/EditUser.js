@@ -1,52 +1,70 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserByIdAction, updateUserByIDAction } from '../redux/UserAction';
+import { useParams } from 'react-router-dom';
 
-const validationSchema = yup.object({
-    fname: yup
-        .string()
-        .required('Required'),
-    lname: yup
-        .string()
-        .required('Required'),
-    email: yup
-        .string()
-        .required('Required')
-        .email('Invalid Email Format'),
-    state: yup
-        .string()
-        .required('Required'),
-    city: yup
-        .string()
-        .required('Required'),
-    pincode: yup
-        .string()
-        .required('Required')
-        .max(5, 'max limite is 5 only'),
-})
 
-const onUserAdd = values => {
-    const object = {
-        fname: values.fname,
-        lname: values.lname,
-        email: values.email,
-        state: values.state,
-        city: values.city,
-        pincode: values.pincode
+const EditUser = (props) => {
+    const dispatch = useDispatch();
+
+
+
+
+    const validationSchema = yup.object({
+        fname: yup
+            .string()
+            .required('Required'),
+        lname: yup
+            .string()
+            .required('Required'),
+        email: yup
+            .string()
+            .required('Required')
+            .email('Invalid Email Format'),
+        state: yup
+            .string()
+            .required('Required'),
+        city: yup
+            .string()
+            .required('Required'),
+        pincode: yup
+            .string()
+            .required('Required')
+            .max(5, 'max limite is 5 only'),
+    })
+
+    const onUserAdd = values => {
+        const object = {
+            fname: values.fname,
+            lname: values.lname,
+            email: values.email,
+            state: values.state,
+            city: values.city,
+            pincode: values.pincode
+        }
+        dispatch(updateUserByIDAction(object, id, props.history))
     }
-}
 
-const EditUser = () => {
+    let { id } = useParams()
+
+    useEffect(() => {
+        dispatch(getUserByIdAction(id))
+    }, [])
+
+    const users = useSelector(state => state.data.user)
+    console.log('user', users)
     return (
         <div className="container-fluid">
             <Formik
                 initialValues={{
-                    fname: '',
-                    lname: '',
-                    email: '',
-                    state: '',
-                    city: '',
-                    pincode: ''
+                    fname: users && users.user && users.user.fname,
+                    lname: users && users.user && users.user.lname,
+                    email: users && users.user && users.user.email,
+                    state: users && users.user && users.user.state,
+                    city: users && users.user && users.user.city,
+                    pincode: users && users.user && users.user.pincode
                 }}
                 validationSchema={validationSchema}
                 onSubmit={values => onUserAdd(values)}
